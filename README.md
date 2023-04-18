@@ -7,6 +7,8 @@
 
 --------------------------------------------------------------------
 
+> :warning: This version of Chiadog require Chia `>=1.7.1`!
+
 # Watchdog for your Chia farm
 
 So you've become a [Chia](https://www.chia.net) farmer and want to maximize the probability of getting a reward? Chiadog
