@@ -35,7 +35,7 @@ class WalletAddCoinHandler(LogHandlerInterface):
 
         total_mojos = 0
         for coin_msg in added_coin_messages:
-            logging.info(f"Cha-ching! Just received {coin_msg.amount_mojos} mojos.")
+            logging.info(f"Just received {coin_msg.amount_mojos} mojos 💰")
             total_mojos += coin_msg.amount_mojos
 
         if total_mojos > self.min_mojos_amount:
@@ -46,7 +46,7 @@ class WalletAddCoinHandler(LogHandlerInterface):
                     type=EventType.USER,
                     priority=EventPriority.LOW,
                     service=EventService.WALLET,
-                    message=f"Cha-ching! Just received {xch_string} XCH ☘️",
+                    message=f"Just received {xch_string} XCH 💰",
                 )
             )
         elif total_mojos != 0:
