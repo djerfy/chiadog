@@ -7,7 +7,7 @@ import copy
 import confuse
 
 # project
-from src.chia_log.handlers.wallet_added_coin_handler import WalletAddedCoinHandler
+from src.chia_log.handlers.wallet_add_coin_handler import WalletAddCoinHandler
 from src.notifier import EventType, EventService, EventPriority
 
 
@@ -16,10 +16,10 @@ class TestWalledAddedCoinHandler(unittest.TestCase):
         config_dir = Path(__file__).resolve().parents[3]
         self.config = confuse.Configuration("chiadog", __name__)
         self.config.set_file(config_dir / "src/default_config.yaml")
-        self.handler_config = self.config["handlers"][WalletAddedCoinHandler.config_name()]
+        self.handler_config = self.config["handlers"][WalletAddCoinHandler.config_name()]
 
-        self.handler = WalletAddedCoinHandler(config=self.handler_config)
-        self.example_logs_path = Path(__file__).resolve().parents[1] / "logs/wallet_added_coin"
+        self.handler = WalletAddCoinHandler(config=self.handler_config)
+        self.example_logs_path = Path(__file__).resolve().parents[1] / "logs/wallet_add_coin"
 
     def tearDown(self) -> None:
         self.config.clear()
@@ -57,8 +57,8 @@ class TestWalledAddedCoinHandler(unittest.TestCase):
         filter_config = copy.deepcopy(self.handler_config)
         filter_config["min_mojos_amount"].set(5)
 
-        filter_handler = WalletAddedCoinHandler(filter_config)
-        no_filter_handler = WalletAddedCoinHandler(no_filter_config)
+        filter_handler = WalletAddCoinHandler(filter_config)
+        no_filter_handler = WalletAddCoinHandler(no_filter_config)
         with open(self.example_logs_path / "small_values.txt", encoding="UTF-8") as f:
             logs = f.readlines()
         filter_events = filter_handler.handle("".join(logs))

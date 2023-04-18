@@ -2,10 +2,10 @@
 from datetime import datetime
 
 # project
-from .. import WalletAddedCoinMessage, WalletAddedCoinConsumer, StatAccumulator
+from .. import WalletAddCoinMessage, WalletAddCoinConsumer, StatAccumulator
 
 
-class WalletAddedCoinStats(WalletAddedCoinConsumer, StatAccumulator):
+class WalletAddCoinStats(WalletAddCoinConsumer, StatAccumulator):
     def __init__(self):
         self._last_reset_time = datetime.now()
         self._total_added_mojos = 0
@@ -14,7 +14,7 @@ class WalletAddedCoinStats(WalletAddedCoinConsumer, StatAccumulator):
         self._last_reset_time = datetime.now()
         self._total_added_mojos = 0
 
-    def consume(self, obj: WalletAddedCoinMessage):
+    def consume(self, obj: WalletAddCoinMessage):
         self._total_added_mojos += obj.amount_mojos
 
     def get_summary(self) -> str:

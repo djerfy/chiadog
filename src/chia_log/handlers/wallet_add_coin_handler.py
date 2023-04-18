@@ -7,23 +7,23 @@ from confuse import ConfigView
 
 # project
 from . import LogHandlerInterface
-from ..parsers.wallet_added_coin_parser import WalletAddedCoinParser
+from ..parsers.wallet_add_coin_parser import WalletAddCoinParser
 from .daily_stats.stats_manager import StatsManager
 from src.notifier import Event, EventService, EventType, EventPriority
 
 
-class WalletAddedCoinHandler(LogHandlerInterface):
+class WalletAddCoinHandler(LogHandlerInterface):
     """This handler parses all logs that report wallet
     receiving XCH and creates user notifications.
     """
 
     @staticmethod
     def config_name() -> str:
-        return "wallet_added_coin_handler"
+        return "wallet_add_coin_handler"
 
     def __init__(self, config: ConfigView):
         super().__init__(config)
-        self._parser = WalletAddedCoinParser()
+        self._parser = WalletAddCoinParser()
         self.min_mojos_amount = config["min_mojos_amount"].get(int)
         logging.info(f"Filtering transaction with mojos less than {self.min_mojos_amount}")
 

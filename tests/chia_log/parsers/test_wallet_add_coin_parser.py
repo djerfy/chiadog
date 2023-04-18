@@ -3,13 +3,13 @@ import unittest
 from pathlib import Path
 
 # project
-from src.chia_log.parsers.wallet_added_coin_parser import WalletAddedCoinParser
+from src.chia_log.parsers.wallet_add_coin_parser import WalletAddCoinParser
 
 
-class TestWalletAddedCoinParser(unittest.TestCase):
+class TestWalletAddCoinParser(unittest.TestCase):
     def setUp(self) -> None:
-        self.parser = WalletAddedCoinParser()
-        self.example_logs_path = Path(__file__).resolve().parents[1] / "logs/wallet_added_coin"
+        self.parser = WalletAddCoinParser()
+        self.example_logs_path = Path(__file__).resolve().parents[1] / "logs/wallet_add_coin"
         with open(self.example_logs_path / "nominal-before-1.4.0.txt", encoding="UTF-8") as f:
             self.nominal_logs_before_140 = f.read()
         with open(self.example_logs_path / "nominal-after-1.4.0.txt", encoding="UTF-8") as f:

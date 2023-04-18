@@ -44,7 +44,7 @@ daily_stats:
 # The enabled param is deprecated, all are enabled if their
 # service is enabled in monitored_services.
 handlers:
-  wallet_added_coin_handler:
+  wallet_add_coin_handler:
     min_mojos_amount: 0
   wallet_peak_handler:
     # Observed usual drift is about a minute on a beefy node.

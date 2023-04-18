@@ -10,12 +10,12 @@ from dateutil import parser as dateutil_parser
 
 
 @dataclass
-class WalletAddedCoinMessage:
+class WalletAddCoinMessage:
     timestamp: datetime
     amount_mojos: int
 
 
-class WalletAddedCoinParser:
+class WalletAddCoinParser:
     """This class can parse info log messages from the chia wallet
 
     You need to have enabled "log_level: INFO" in your chia config.yaml
@@ -29,7 +29,7 @@ class WalletAddedCoinParser:
             r"INFO\s*(?:Adding|Adding record to state manager|request) coin: (?:.*)'?amount'?: ([0-9]*)(\s})?,"
         )
 
-    def parse(self, logs: str) -> List[WalletAddedCoinMessage]:
+    def parse(self, logs: str) -> List[WalletAddCoinMessage]:
         """Parses all harvester activity messages from a bunch of logs
 
         :param logs: String of logs - can be multi-line
@@ -40,7 +40,7 @@ class WalletAddedCoinParser:
         matches = self._regex.findall(logs)
         for match in matches:
             parsed_messages.append(
-                WalletAddedCoinMessage(
+                WalletAddCoinMessage(
                     timestamp=dateutil_parser.parse(match[0]),
                     amount_mojos=int(match[1]),
                 )

@@ -14,18 +14,18 @@ from . import (
     HarvesterActivityConsumer,
     PartialConsumer,
     BlockConsumer,
-    WalletAddedCoinConsumer,
+    WalletAddCoinConsumer,
     FinishedSignageConsumer,
 )
 from .stat_accumulators.eligible_plots_stats import EligiblePlotsStats
-from .stat_accumulators.wallet_added_coin_stats import WalletAddedCoinStats
+from .stat_accumulators.wallet_add_coin_stats import WalletAddCoinStats
 from .stat_accumulators.search_time_stats import SearchTimeStats
 from .stat_accumulators.signage_point_stats import SignagePointStats
 from .stat_accumulators.found_proof_stats import FoundProofStats
 from .stat_accumulators.number_plots_stats import NumberPlotsStats
 from .stat_accumulators.found_partial_stats import FoundPartialStats
 from .stat_accumulators.found_block_stats import FoundBlockStats
-from src.chia_log.parsers.wallet_added_coin_parser import WalletAddedCoinMessage
+from src.chia_log.parsers.wallet_add_coin_parser import WalletAddCoinMessage
 from src.chia_log.parsers.harvester_activity_parser import HarvesterActivityMessage
 from src.chia_log.parsers.finished_signage_point_parser import FinishedSignagePointMessage
 from src.chia_log.parsers.partial_parser import PartialMessage
@@ -51,7 +51,7 @@ class StatsManager:
         logging.info("Enabled stats for daily notifications")
         self._notify_manager = notify_manager
         self._stat_accumulators = [
-            WalletAddedCoinStats(),
+            WalletAddCoinStats(),
             FoundProofStats(),
             FoundPartialStats(),
             FoundBlockStats(),
@@ -76,11 +76,11 @@ class StatsManager:
         self._thread = Thread(target=self._run_loop)
         self._thread.start()
 
-    def consume_wallet_messages(self, objects: List[WalletAddedCoinMessage]):
+    def consume_wallet_messages(self, objects: List[WalletAddCoinMessage]):
         if not self._enable:
             return
         for stat_acc in self._stat_accumulators:
-            if isinstance(stat_acc, WalletAddedCoinConsumer):
+            if isinstance(stat_acc, WalletAddCoinConsumer):
                 for obj in objects:
                     stat_acc.consume(obj)
 

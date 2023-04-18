@@ -54,7 +54,7 @@ monitored_services:
 
 # In this section you can configure log handler details
 handlers:
-  wallet_added_coin_handler:
+  wallet_add_coin_handler:
     # Transactions with lower amount mojos will be ignored
     # Use this to avoid notification spam during dust storms
     min_mojos_amount:  5 # default: 0
