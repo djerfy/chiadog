@@ -47,12 +47,12 @@ class TestWalledAddedCoinHandler(unittest.TestCase):
         self.assertEqual(events[0].type, EventType.USER, "Unexpected event type")
         self.assertEqual(events[0].priority, EventPriority.LOW, "Unexpected priority")
         self.assertEqual(events[0].service, EventService.WALLET, "Unexpected service")
-        self.assertEqual(events[0].message, "Just received 0.000000000001 XCH 💰")
+        self.assertEqual(events[0].message, "Just received 0.004849173605 XCH 💰")
 
     def testTransactionAmountFilter(self):
         no_filter_config = self.handler_config
         filter_config = copy.deepcopy(self.handler_config)
-        filter_config["min_mojos_amount"].set(5)
+        filter_config["min_mojos_amount"].set(500000000000)
 
         filter_handler = WalletAddCoinHandler(filter_config)
         no_filter_handler = WalletAddCoinHandler(no_filter_config)
