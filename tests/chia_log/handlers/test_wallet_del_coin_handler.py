@@ -1,25 +1,20 @@
-# std
 import unittest
 from pathlib import Path
 import copy
-
-# lib
 import confuse
-
-# project
-from src.chia_log.handlers.wallet_add_coin_handler import WalletAddCoinHandler
+from src.chia_log.handlers.wallet_del_coin_handler import WalletDelCoinHandler
 from src.notifier import EventType, EventService, EventPriority
 
 
-class TestWalletAddCoinHandler(unittest.TestCase):
+class TestWalletDelCoinHandler(unittest.TestCase):
     def setUp(self) -> None:
         config_dir = Path(__file__).resolve().parents[3]
         self.config = confuse.Configuration("chiadog", __name__)
         self.config.set_file(config_dir / "src/default_config.yaml")
-        self.handler_config = self.config["handlers"][WalletAddCoinHandler.config_name()]
+        self.handler_config = self.config["handlers"][WalletDelCoinHandler.config_name()]
 
-        self.handler = WalletAddCoinHandler(config=self.handler_config)
-        self.example_logs_path = Path(__file__).resolve().parents[1] / "logs/wallet_add_coin"
+        self.handler = WalletDelCoinHandler(config=self.handler_config)
+        self.example_logs_path = Path(__file__).resolve().parents[1] / "logs/wallet_del_coin"
 
     def tearDown(self) -> None:
         self.config.clear()
@@ -36,7 +31,7 @@ class TestWalletAddCoinHandler(unittest.TestCase):
         self.assertEqual(events[0].type, EventType.USER, "Unexpected event type")
         self.assertEqual(events[0].priority, EventPriority.LOW, "Unexpected priority")
         self.assertEqual(events[0].service, EventService.WALLET, "Unexpected service")
-        self.assertEqual(events[0].message, "Just received 2 XCH 💰")
+        self.assertEqual(events[0].message, "Just sent 1.75 XCH 💰")
 
     def testFloatPrecision(self):
         with open(self.example_logs_path / "small_values.txt", encoding="UTF-8") as f:
@@ -47,15 +42,15 @@ class TestWalletAddCoinHandler(unittest.TestCase):
         self.assertEqual(events[0].type, EventType.USER, "Unexpected event type")
         self.assertEqual(events[0].priority, EventPriority.LOW, "Unexpected priority")
         self.assertEqual(events[0].service, EventService.WALLET, "Unexpected service")
-        self.assertEqual(events[0].message, "Just received 0.004849173605 XCH 💰")
+        self.assertEqual(events[0].message, "Just sent 0.004849173605 XCH 💰")
 
     def testTransactionAmountFilter(self):
         no_filter_config = self.handler_config
         filter_config = copy.deepcopy(self.handler_config)
         filter_config["min_mojos_amount"].set(500000000000)
 
-        filter_handler = WalletAddCoinHandler(filter_config)
-        no_filter_handler = WalletAddCoinHandler(no_filter_config)
+        filter_handler = WalletDelCoinHandler(filter_config)
+        no_filter_handler = WalletDelCoinHandler(no_filter_config)
         with open(self.example_logs_path / "small_values.txt", encoding="UTF-8") as f:
             logs = f.readlines()
         filter_events = filter_handler.handle("".join(logs))

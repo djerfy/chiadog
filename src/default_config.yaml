@@ -46,6 +46,8 @@ daily_stats:
 handlers:
   wallet_add_coin_handler:
     min_mojos_amount: 0
+  wallet_del_coin_handler:
+    min_mojos_amount: 0
   wallet_peak_handler:
     # Observed usual drift is about a minute on a beefy node.
     # A conservative value is used however to avoid flooding low powered users by default.
