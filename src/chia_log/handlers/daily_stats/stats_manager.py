@@ -117,7 +117,7 @@ class StatsManager:
                     stat_acc.consume(obj)
 
     def _send_daily_notification(self):
-        summary = f"Hello farmer! 👋 Here's what happened in the last {self._frequency_hours} hours:\n"
+        summary = f"Hi! 👋 Here's what happened in the last {self._frequency_hours} hours:\n"
         for stat_acc in self._stat_accumulators:
             summary += "\n" + stat_acc.get_summary()
             stat_acc.reset()
