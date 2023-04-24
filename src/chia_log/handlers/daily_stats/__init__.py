@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 from ...parsers.finished_signage_point_parser import FinishedSignagePointMessage
 from ...parsers.harvester_activity_parser import HarvesterActivityMessage
 from ...parsers.wallet_add_coin_parser import WalletAddCoinMessage
+from ...parsers.wallet_del_coin_parser import WalletDelCoinMessage
 from ...parsers.partial_parser import PartialMessage
 from ...parsers.block_parser import BlockMessage
 
@@ -36,6 +37,12 @@ class BlockConsumer(ABC):
 class WalletAddCoinConsumer(ABC):
     @abstractmethod
     def consume(self, obj: WalletAddCoinMessage):
+        pass
+
+
+class WalletDelCoinConsumer(ABC):
+    @abstractmethod
+    def consume(self, obj: WalletDelCoinMessage):
         pass
 
 
