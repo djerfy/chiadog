@@ -55,9 +55,15 @@ monitored_services:
 # In this section you can configure log handler details
 handlers:
   wallet_add_coin_handler:
+    enable: true
     # Transactions with lower amount mojos will be ignored
     # Use this to avoid notification spam during dust storms
-    min_mojos_amount:  5 # default: 0
+    min_mojos_amount: 5 # default: 0
+  wallet_del_coin_handler:
+    enable: true
+    # Transactions with lower amount mojos will be ignored
+    # Use this to avoid notifications spam during dust storms
+    min_mojos_amount: 5 # default: 0
   wallet_peak_handler:
     # Observed wallet delay is usually about a minute on a beefy node but
     # you may need to experiment to find what's normal for you.
