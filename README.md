@@ -25,7 +25,7 @@ Chiadog helps with automated monitoring and sends you a mobile notification in c
 | Full Node | Block found! 🎉 | LOW |
 | Wallet | Just received 1.75 XCH 💰 | LOW |
 | Wallet | Just sent 1 XCH 💰 | LOW |
-| Daily Stats | Hi! 👋 Here's what happened in the last 24 hours: <br /><br /> Wallet 💰:<br /> - **2.00** XCH️ received<br /> - **0** XCH sent<br /> Proofs 🧾: **176** found!<br />  - **176** partials submitted 📑<br /> - **0** blocks found 🍀<br/> Search 🔍: <br /> - average: **0.46**s <br /> - over 5s: 2 occasions <br /> - over 15s: 1 occasions <br/> Plots 🌱: **42**, new: **2** <br /> Eligible plots 🥇: **0.08** average<br /> Skipped SPs ⚠️: 7 (0.01%) <br /> | LOW |
+| Daily Stats | Hi! 👋 Here's what happened in the last 24 hours: <br /><br /> Wallet 💰:<br /> - **1.75** XCH️ received<br /> - **1** XCH sent<br /> Proofs 🧾: **176** found!<br />  - **176** partials submitted 📑<br /> - **0** blocks found 🍀<br/> Search 🔍: <br /> - average: **0.46**s <br /> - over 5s: 2 occasions <br /> - over 15s: 1 occasions <br/> Plots 🌱: **42**, new: **2** <br /> Eligible plots 🥇: **0.08** average<br /> Skipped SPs ⚠️: 7 (0.01%) <br /> | LOW |
 
 Please refer to [Status Reference](https://github.com/martomi/chiadog/wiki/Status-Reference) page for detailed
 explanations of the notifications.
