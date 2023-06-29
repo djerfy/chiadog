@@ -20,4 +20,4 @@ class WalletDelCoinStats(WalletDelCoinConsumer, StatAccumulator):
     def get_summary(self) -> str:
         chia_coins = self._total_deleted_mojos / 1e12
         xch_string = f"{chia_coins:.12f}".rstrip("0").rstrip(".")
-        return f"Sent 💰: {xch_string} XCH"
+        return f"\t - {xch_string} XCH sent"
