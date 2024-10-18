@@ -6,7 +6,7 @@
 
 # Chiadog
 
-> :warning: **Warning:** this version of Chiadog require Chia >= 1.7.1, not supported below (due to log format).
+> :warning: **Warning:** this version of Chiadog require Chia >= 2.4.4, not supported below (due to log format).
 
 So you've become a [Chia](https://www.chia.net) farmer and want to maximize the probability of getting a reward?
 
@@ -69,7 +69,7 @@ For detailed guide on how to test and configure, please refer to [INTEGRATIONS.m
 ## Pre-requisites
 
 - Linux, MacOS & Windows
-- Python 3.7+
+- Python 3.10+
 - [Git](https://git-scm.com/downloads)
 - Enabled `INFO` logs on your chia farmer
 
