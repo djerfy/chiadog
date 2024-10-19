@@ -6,7 +6,7 @@
 
 # Chiadog
 
-> :warning: **Warning:** this version of Chiadog require Chia >= 2.4.4, not supported below (due to log format).
+> :warning: **Warning:** this version of Chiadog require Chia >= 1.7.1, not supported below (due to log format), and works with Chia 2.4.4.
 
 So you've become a [Chia](https://www.chia.net) farmer and want to maximize the probability of getting a reward?
 
