@@ -27,7 +27,8 @@ class BlockParser:
     def __init__(self):
         logging.debug("Enabled parser for block found stats.")
         self._regex = re.compile(
-            r"([0-9:.]*)(?:\s[0-9:.]*)? full_node (?:src|chia).full_node.full_node\s*: INFO\s* ((?:🍀 ️|.)\s*Farmed unfinished_block)"
+            r"([0-9:.]*)(?:\s[0-9:.]*)? full_node (?:src|chia).full_node.full_node\s*: "
+            r"INFO\s* ((?:🍀 ️|.)\s*Farmed unfinished_block)"
         )
 
     def parse(self, logs: str) -> List[BlockMessage]:
