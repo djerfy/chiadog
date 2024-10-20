@@ -80,7 +80,9 @@ class StatsManager:
         self._thread = Thread(target=self._run_loop)
         self._thread.start()
 
-    def consume_wallet_messages(self, objects_added: List[WalletAddCoinMessage], objects_deleted: List[WalletDelCoinMessage]):
+    def consume_wallet_messages(
+        self, objects_added: List[WalletAddCoinMessage], objects_deleted: List[WalletDelCoinMessage]
+    ):
         if not self._enable:
             return
         for stat_acc in self._stat_accumulators:

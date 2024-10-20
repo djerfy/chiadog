@@ -31,7 +31,7 @@ class WalletAddCoinHandler(LogHandlerInterface):
         events = []
         added_coin_messages = self._parser.parse(logs)
         if stats_manager:
-            stats_manager.consume_wallet_messages(added_coin_messages, '')
+            stats_manager.consume_wallet_messages(added_coin_messages, "")
 
         total_mojos = 0
         for coin_msg in added_coin_messages:
