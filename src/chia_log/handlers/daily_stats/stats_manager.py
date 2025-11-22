@@ -97,11 +97,11 @@ class StatsManager:
             return
         for stat_acc in self._stat_accumulators:
             if isinstance(stat_acc, WalletAddCoinConsumer):
-                for obj in objects_added:
-                    stat_acc.consume(obj)
+                for add_obj in objects_added:
+                    stat_acc.consume(add_obj)
             if isinstance(stat_acc, WalletDelCoinConsumer):
-                for obj in objects_deleted:
-                    stat_acc.consume(obj)
+                for del_obj in objects_deleted:
+                    stat_acc.consume(del_obj)
 
     def consume_harvester_messages(
         self,
