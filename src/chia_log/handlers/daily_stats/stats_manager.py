@@ -43,11 +43,7 @@ class StatsManager:
     with a summary from all stats that have been collected for the past 24 hours.
     """
 
-    def __init__(
-        self,
-        config: ConfigView,
-        notify_manager: NotifyManager
-    ):
+    def __init__(self, config: ConfigView, notify_manager: NotifyManager):
         self._enable = config["enable"].get(bool)
         self._notify_time = self._parse_notify_time(config["time_of_day"].get())
         self._frequency_hours = config["frequency_hours"].get(int)
@@ -75,10 +71,7 @@ class StatsManager:
             f"hours starting from {self._notify_time['hour']:02d}:{self._notify_time['minute']:02d}"
         )
         self._datetime_next_summary = datetime.now().replace(
-            hour=self._notify_time["hour"],
-            minute=self._notify_time["minute"],
-            second=0,
-            microsecond=0
+            hour=self._notify_time["hour"], minute=self._notify_time["minute"], second=0, microsecond=0
         )
         while datetime.now() > self._datetime_next_summary:
             self._datetime_next_summary += timedelta(hours=self._frequency_hours)
@@ -89,9 +82,7 @@ class StatsManager:
         self._thread.start()
 
     def consume_wallet_messages(
-        self,
-        objects_added: List[WalletAddCoinMessage],
-        objects_deleted: List[WalletDelCoinMessage]
+        self, objects_added: List[WalletAddCoinMessage], objects_deleted: List[WalletDelCoinMessage]
     ):
         if not self._enable:
             return
@@ -103,10 +94,7 @@ class StatsManager:
                 for del_obj in objects_deleted:
                     stat_acc.consume(del_obj)
 
-    def consume_harvester_messages(
-        self,
-        objects: List[HarvesterActivityMessage]
-    ):
+    def consume_harvester_messages(self, objects: List[HarvesterActivityMessage]):
         if not self._enable:
             return
         for stat_acc in self._stat_accumulators:
@@ -114,10 +102,7 @@ class StatsManager:
                 for obj in objects:
                     stat_acc.consume(obj)
 
-    def consume_partial_messages(
-        self,
-        objects: List[PartialMessage]
-    ):
+    def consume_partial_messages(self, objects: List[PartialMessage]):
         if not self._enable:
             return
         for stat_acc in self._stat_accumulators:
@@ -125,10 +110,7 @@ class StatsManager:
                 for obj in objects:
                     stat_acc.consume(obj)
 
-    def consume_block_messages(
-        self,
-        objects: List[BlockMessage]
-    ):
+    def consume_block_messages(self, objects: List[BlockMessage]):
         if not self._enable:
             return
         for stat_acc in self._stat_accumulators:
@@ -136,10 +118,7 @@ class StatsManager:
                 for obj in objects:
                     stat_acc.consume(obj)
 
-    def consume_signage_point_messages(
-        self,
-        objects: List[FinishedSignagePointMessage]
-    ):
+    def consume_signage_point_messages(self, objects: List[FinishedSignagePointMessage]):
         if not self._enable:
             return
         for stat_acc in self._stat_accumulators:
@@ -147,9 +126,7 @@ class StatsManager:
                 for obj in objects:
                     stat_acc.consume(obj)
 
-    def _send_daily_notification(
-        self
-    ):
+    def _send_daily_notification(self):
         summary = f"Hi! 👋 Here's what happened in the last {self._frequency_hours} hours:\n"
         for stat_acc in self._stat_accumulators:
             summary += "\n" + stat_acc.get_summary()
@@ -159,25 +136,17 @@ class StatsManager:
             [Event(type=EventType.DAILY_STATS, priority=EventPriority.LOW, service=EventService.DAILY, message=summary)]
         )
 
-    def _run_loop(
-        self
-    ):
+    def _run_loop(self):
         while self._is_running:
             if datetime.now() > self._datetime_next_summary:
                 self._send_daily_notification()
                 self._datetime_next_summary += timedelta(hours=self._frequency_hours)
             sleep(1)
 
-    def stop(
-        self
-    ):
+    def stop(self):
         self._is_running = False
 
-    def _parse_notify_time(
-        self,
-        value: Union[str, int],
-        default: dict = {"hour": 21, "minute": 0}
-    ) -> dict:
+    def _parse_notify_time(self, value: Union[str, int], default: dict = {"hour": 21, "minute": 0}) -> dict:
         if type(value) == int:
             return {"hour": value, "minute": 0}
 
